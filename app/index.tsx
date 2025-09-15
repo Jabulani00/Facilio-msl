@@ -1,5 +1,5 @@
-import { View, StyleSheet, Dimensions } from 'react-native';
-import { Text, Button, Card, Surface } from 'react-native-paper';
+import { View, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { Text, Button, Card, Surface, FAB } from 'react-native-paper';
 import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -24,133 +24,101 @@ export default function WelcomeScreen() {
         <View style={styles.decorativeCircle4} />
         <View style={styles.decorativeCircle5} />
         
-        <View style={styles.content}>
-          {/* Header with luxury logo */}
+        {/* Small login button in top corner */}
+        <View style={styles.topButtonContainer}>
+          <Button
+            mode="outlined"
+            onPress={() => router.push('/auth/login')}
+            style={styles.topButton}
+            contentStyle={styles.topButtonContent}
+            icon="login"
+            labelStyle={styles.topButtonLabel}
+            compact
+          >
+            Sign In
+          </Button>
+        </View>
+
+        <ScrollView 
+          style={styles.scrollContainer}
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          {/* Clean header */}
           <View style={styles.header}>
-            <Surface style={styles.logoContainer} elevation={8}>
-              <LinearGradient
-                colors={[colors.primary, colors.secondary]}
-                style={styles.logoGradient}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-              >
-                <Icon name="home-city" size={48} color={colors.surface} />
-              </LinearGradient>
-            </Surface>
-            <Text variant="headlineLarge" style={styles.title}>
+            <View style={styles.logoContainer}>
+              <Icon name="home-city" size={40} color={colors.primary} />
+            </View>
+            <Text style={styles.title}>
               Facilio
             </Text>
-            <Text variant="titleMedium" style={styles.tagline}>
-              Luxury Property Management
+            <Text style={styles.tagline}>
+              Property Management
             </Text>
           </View>
 
-          {/* Feature highlights with luxury styling */}
-          <View style={styles.featuresContainer}>
-            <View style={styles.featureItem}>
-              <Surface style={styles.featureIcon} elevation={4}>
-                <Icon name="shield-check" size={20} color={colors.accent} />
-              </Surface>
-              <Text variant="bodySmall" style={styles.featureText}>
-                Secure & Reliable
-              </Text>
-            </View>
-            <View style={styles.featureItem}>
-              <Surface style={styles.featureIcon} elevation={4}>
-                <Icon name="lightning-bolt" size={20} color={colors.accent} />
-              </Surface>
-              <Text variant="bodySmall" style={styles.featureText}>
-                Fast & Efficient
-              </Text>
-            </View>
-            <View style={styles.featureItem}>
-              <Surface style={styles.featureIcon} elevation={4}>
-                <Icon name="chart-line" size={20} color={colors.accent} />
-              </Surface>
-              <Text variant="bodySmall" style={styles.featureText}>
-                Smart Analytics
-              </Text>
-            </View>
+          {/* Simple welcome message */}
+          <View style={styles.welcomeContainer}>
+            <Text style={styles.welcomeTitle}>
+              Smart Property Management
+            </Text>
+            <Text style={styles.subtitle}>
+              Streamline operations with digital access, maintenance tracking, and seamless payments.
+            </Text>
           </View>
 
-          {/* Small login button in top corner */}
-          <View style={styles.topButtonContainer}>
-            <Button
-              mode="outlined"
-              onPress={() => router.push('/auth/login')}
-              style={styles.topButton}
-              contentStyle={styles.topButtonContent}
-              icon="login"
-              labelStyle={styles.topButtonLabel}
-              compact
-            >
-              Sign In
-            </Button>
-          </View>
-
-          {/* Main content without card */}
-          <View style={styles.mainContent}>
-            <Text variant="headlineLarge" style={styles.welcomeTitle}>
-              Welcome to Excellence
-            </Text>
-            <Text variant="bodyLarge" style={styles.subtitle}>
-              Experience premium property management with our sophisticated platform designed for discerning clients.
-            </Text>
-            
-            <View style={styles.buttonContainer}>
-              <Button
-                mode="contained"
-                onPress={() => router.push('/auth/login')}
-                style={styles.primaryButton}
-                contentStyle={styles.buttonContent}
-                icon="arrow-right"
-                labelStyle={styles.buttonLabel}
-              >
-                Get Started
-              </Button>
-              
-              <Button
-                mode="outlined"
-                onPress={() => router.push('/auth/register')}
-                style={styles.secondaryButton}
-                contentStyle={styles.buttonContent}
-                icon="account-plus"
-                labelStyle={styles.buttonLabel}
-              >
-                Create Account
-              </Button>
+          {/* Clean feature cards */}
+          <View style={styles.cardsContainer}>
+            <View style={styles.featureCard}>
+              <View style={styles.cardIconContainer}>
+                <Icon name="key" size={24} color={colors.primary} />
+              </View>
+              <View style={styles.cardTextContainer}>
+                <Text style={styles.cardTitle}>Access Control</Text>
+                <Text style={styles.cardDescription}>Digital keys and secure access</Text>
+              </View>
             </View>
 
-            {/* Quick access with luxury styling */}
-            <View style={styles.quickAccessContainer}>
-              <Text variant="bodySmall" style={styles.quickAccessLabel}>
-                Quick Access
-              </Text>
-              <View style={styles.quickAccessButtons}>
-                <Button
-                  mode="text"
-                  onPress={() => router.push('/access-control/tenant-access-portal')}
-                  style={styles.quickButton}
-                  icon="key"
-                  compact
-                  labelStyle={styles.quickButtonLabel}
-                >
-                  Tenant Portal
-                </Button>
-                <Button
-                  mode="text"
-                  onPress={() => router.push('/auth/tenant-invitation')}
-                  style={styles.quickButton}
-                  icon="email"
-                  compact
-                  labelStyle={styles.quickButtonLabel}
-                >
-                  Invitation
-                </Button>
+            <View style={styles.featureCard}>
+              <View style={styles.cardIconContainer}>
+                <Icon name="wrench" size={24} color={colors.primary} />
+              </View>
+              <View style={styles.cardTextContainer}>
+                <Text style={styles.cardTitle}>Maintenance</Text>
+                <Text style={styles.cardDescription}>Request and track issues</Text>
+              </View>
+            </View>
+
+            <View style={styles.featureCard}>
+              <View style={styles.cardIconContainer}>
+                <Icon name="credit-card" size={24} color={colors.primary} />
+              </View>
+              <View style={styles.cardTextContainer}>
+                <Text style={styles.cardTitle}>Payments</Text>
+                <Text style={styles.cardDescription}>Seamless rent and utility payments</Text>
+              </View>
+            </View>
+
+            <View style={styles.featureCard}>
+              <View style={styles.cardIconContainer}>
+                <Icon name="calendar-check" size={24} color={colors.primary} />
+              </View>
+              <View style={styles.cardTextContainer}>
+                <Text style={styles.cardTitle}>Amenities</Text>
+                <Text style={styles.cardDescription}>Book gym, pool, and facilities</Text>
               </View>
             </View>
           </View>
-        </View>
+        </ScrollView>
+        
+        {/* Floating Action Button */}
+        <FAB
+          icon="login"
+          style={styles.fab}
+          onPress={() => router.push('/auth/login')}
+          size="small"
+          customSize={40}
+        />
       </LinearGradient>
     </SafeAreaView>
   );
@@ -165,145 +133,101 @@ const styles = StyleSheet.create({
     flex: 1,
     position: 'relative',
   },
-  // Luxury decorative elements with enhanced styling
+  // Subtle decorative elements
   decorativeCircle1: {
     position: 'absolute',
-    top: -80,
-    right: -80,
-    width: 250,
-    height: 250,
-    borderRadius: 125,
-    backgroundColor: colors.accent,
-    opacity: 0.08,
-    shadowColor: colors.accent,
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.3,
-    shadowRadius: 16,
+    top: -60,
+    right: -60,
+    width: 180,
+    height: 180,
+    borderRadius: 90,
+    backgroundColor: colors.primary,
+    opacity: 0.03,
   },
   decorativeCircle2: {
     position: 'absolute',
-    bottom: -120,
-    left: -120,
-    width: 350,
-    height: 350,
-    borderRadius: 175,
-    backgroundColor: colors.primary,
-    opacity: 0.06,
-    shadowColor: colors.primary,
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.2,
-    shadowRadius: 20,
-  },
-  decorativeCircle3: {
-    position: 'absolute',
-    top: height * 0.25,
-    right: -100,
+    bottom: -80,
+    left: -80,
     width: 200,
     height: 200,
     borderRadius: 100,
-    backgroundColor: colors.secondary,
-    opacity: 0.1,
-    shadowColor: colors.secondary,
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.25,
-    shadowRadius: 12,
+    backgroundColor: colors.accent,
+    opacity: 0.04,
   },
-  decorativeCircle4: {
+  decorativeCircle3: {
     position: 'absolute',
-    top: height * 0.6,
-    left: -60,
+    top: height * 0.3,
+    right: -50,
     width: 120,
     height: 120,
     borderRadius: 60,
-    backgroundColor: colors.accent,
-    opacity: 0.12,
+    backgroundColor: colors.secondary,
+    opacity: 0.05,
   },
-  decorativeCircle5: {
+  decorativeCircle4: {
     position: 'absolute',
-    top: height * 0.1,
-    left: width * 0.3,
+    top: height * 0.7,
+    left: -40,
     width: 80,
     height: 80,
     borderRadius: 40,
     backgroundColor: colors.primary,
-    opacity: 0.15,
+    opacity: 0.06,
   },
-  content: {
+  decorativeCircle5: {
+    position: 'absolute',
+    top: height * 0.15,
+    left: width * 0.2,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: colors.accent,
+    opacity: 0.08,
+  },
+  // Scrollable content
+  scrollContainer: {
     flex: 1,
-    justifyContent: 'center',
-    padding: 24,
     zIndex: 1,
+  },
+  scrollContent: {
+    paddingBottom: 100, // Space for FAB
   },
   header: {
     alignItems: 'center',
+    marginTop: 80,
     marginBottom: 40,
+    paddingHorizontal: 24,
   },
   logoContainer: {
-    width: 90,
-    height: 90,
-    borderRadius: 45,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
     backgroundColor: colors.surface,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 16,
     shadowColor: colors.shadowColor,
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.3,
-    shadowRadius: 16,
-  },
-  logoGradient: {
-    width: 90,
-    height: 90,
-    borderRadius: 45,
-    justifyContent: 'center',
-    alignItems: 'center',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
   title: {
     textAlign: 'center',
     color: colors.primary,
-    fontWeight: '800',
-    marginBottom: 8,
-    fontSize: 32,
-    letterSpacing: 1,
+    fontWeight: '300',
+    marginBottom: 4,
+    fontSize: 28,
+    letterSpacing: 2,
   },
   tagline: {
     textAlign: 'center',
     color: colors.textSecondary,
-    fontWeight: '600',
-    fontSize: 16,
-    letterSpacing: 0.5,
+    fontWeight: '400',
+    fontSize: 14,
+    letterSpacing: 1,
   },
-  featuresContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginBottom: 40,
-    paddingHorizontal: 20,
-  },
-  featureItem: {
-    alignItems: 'center',
-    flex: 1,
-  },
-  featureIcon: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: colors.surface,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 8,
-    shadowColor: colors.shadowColor,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
-  },
-  featureText: {
-    color: colors.textSecondary,
-    textAlign: 'center',
-    fontSize: 11,
-    fontWeight: '500',
-    letterSpacing: 0.3,
-  },
-  // Top corner button
+  // Top corner button - smaller
   topButtonContainer: {
     position: 'absolute',
     top: 60,
@@ -311,101 +235,102 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   topButton: {
-    borderRadius: 16,
+    borderRadius: 12,
     borderColor: colors.primary,
     backgroundColor: colors.glassBackground,
     shadowColor: colors.shadowColor,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
-    elevation: 6,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    elevation: 4,
   },
   topButtonContent: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
   },
   topButtonLabel: {
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: '600',
-    letterSpacing: 0.3,
+    letterSpacing: 0.2,
   },
-  // Main content without card
-  mainContent: {
-    alignItems: 'center',
+  // Welcome container
+  welcomeContainer: {
     paddingHorizontal: 32,
-    zIndex: 1,
+    marginBottom: 40,
+    alignItems: 'center',
   },
   welcomeTitle: {
     textAlign: 'center',
-    marginBottom: 24,
+    marginBottom: 12,
     color: colors.primary,
-    fontWeight: '800',
-    fontSize: 32,
-    letterSpacing: 1,
+    fontWeight: '300',
+    fontSize: 22,
+    letterSpacing: 0.5,
   },
   subtitle: {
     textAlign: 'center',
-    marginBottom: 36,
     color: colors.textSecondary,
-    lineHeight: 26,
-    fontSize: 16,
-    letterSpacing: 0.2,
+    lineHeight: 22,
+    fontSize: 15,
+    letterSpacing: 0.3,
+    fontWeight: '400',
   },
-  buttonContainer: {
-    gap: 16,
-    marginBottom: 28,
-  },
-  // Elegant smaller buttons
-  primaryButton: {
-    borderRadius: 20,
-    backgroundColor: colors.primary,
-    shadowColor: colors.primary,
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.3,
-    shadowRadius: 12,
-    elevation: 8,
-  },
-  secondaryButton: {
-    borderRadius: 20,
-    borderColor: colors.primary,
-    borderWidth: 2,
-    backgroundColor: 'transparent',
-    shadowColor: colors.primary,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  buttonContent: {
-    paddingVertical: 10,
+  // Cards container
+  cardsContainer: {
     paddingHorizontal: 24,
+    gap: 12,
   },
-  buttonLabel: {
-    fontSize: 14,
-    fontWeight: '600',
-    letterSpacing: 0.5,
-  },
-  quickAccessContainer: {
-    alignItems: 'center',
-  },
-  quickAccessLabel: {
-    color: colors.textSecondary,
-    marginBottom: 16,
-    fontWeight: '600',
-    fontSize: 13,
-    letterSpacing: 0.3,
-  },
-  quickAccessButtons: {
+  // Clean feature cards
+  featureCard: {
     flexDirection: 'row',
-    gap: 20,
+    alignItems: 'center',
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    backgroundColor: colors.surface,
+    borderRadius: 12,
+    shadowColor: colors.shadowColor,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 3,
+    elevation: 1,
   },
-  quickButton: {
-    borderRadius: 16,
-    paddingHorizontal: 16,
+  cardIconContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: colors.background,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 16,
   },
-  quickButtonLabel: {
-    fontSize: 12,
+  cardTextContainer: {
+    flex: 1,
+  },
+  cardTitle: {
+    color: colors.primary,
     fontWeight: '500',
-    letterSpacing: 0.3,
+    fontSize: 16,
+    marginBottom: 2,
+  },
+  cardDescription: {
+    color: colors.textSecondary,
+    fontSize: 13,
+    fontWeight: '400',
+    lineHeight: 18,
+  },
+  // Floating Action Button
+  fab: {
+    position: 'absolute',
+    bottom: 30,
+    right: 20,
+    backgroundColor: colors.primary,
+    borderRadius: 15,
+    width: 60,
+    height: 40,
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
 });
